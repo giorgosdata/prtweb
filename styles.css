@@ -1,0 +1,1292 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&family=Inter:wght@600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+/* =========================
+   CSS μεταβλητές (όλα τα colors εδώ)
+   ========================= */
+:root{
+  --primary:#1B74BB;
+  --secondary:#20BCA8;
+  --text:#0F1C2E;
+  --soft:#5B6B7F;
+  --page-bg: #ffffff;
+  --card-bg: #f6f6f6;
+  --text-main: #0d0d0d;
+  --border-color: #e5e5e5;
+  --radius: 16px;
+  --padding: 24px;
+  --transition: 0.22s ease-out;
+}
+
+/* =========================
+   Βασικό body
+   ========================= */
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  scroll-behavior: smooth;
+  font-weight: 400;     /* ή normal */
+  overflow-x: hidden;
+  color: #24303f;       /* πιο ήπιο, όχι τόσο μαύρο */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  font-size: 16px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 100vh;
+  scroll-padding-top: 80px;
+}
+
+*, *::before, *::after{
+  box-sizing: inherit;
+}
+
+@media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; }
+}
+
+/* =========================
+   Custom Cursor (για όλο το site)
+   ========================= */
+.custom-cursor {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 28px; 
+  height: 28px; 
+  border-radius: 999px;
+  background: rgba(27,116,187,.12);      /* απαλό μπλε */
+  border: 2px solid var(--primary);      /* μπλε περίγραμμα */
+  pointer-events: none; 
+  z-index: 9999; 
+  will-change: transform;
+  box-shadow: 0 0 0 1px rgba(15,23,42,.03);
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease,
+    opacity 0.2s ease;
+}
+
+/* όταν γίνεται scale-up (αν το χρησιμοποιείς κάπου) */
+.custom-cursor.scale-up {
+  transform: scale(2.2);
+}
+
+
+.custom-cursor.cursor-hover{
+  transform: translate(-50%, -50%) scale(1.9);
+  background:#111827;
+}
+
+.custom-cursor.is-hidden{
+  opacity:0;
+}
+
+/* Σε desktop, κρύψε default cursor */
+@media (hover:hover) and (pointer:fine){
+  *{
+    cursor: none !important;
+  }
+}
+
+/* Σε κινητά, κρύψε custom cursor */
+@media (hover:none) and (pointer:coarse){
+  .custom-cursor{ display:none; }
+  body{ cursor:auto; }
+}
+
+/* =========================
+   NAV κοινό για όλες τις σελίδες
+   ========================= */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 28px;
+  background:#a9a3a3;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.logo{
+  height:44px;
+  width:auto;
+}
+@media (min-width: 1024px){
+  .logo{ height: 60px; }
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* basic pill look */
+.nav-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  background:#f5f7fb;
+  color:#111827;
+  border:1px solid transparent;
+  box-shadow:0 0 0 1px rgba(15,23,42,.03);
+}
+
+/* optional: active link */
+.nav-link--active{
+  background:#111827;
+  color:#fff;
+}
+
+.nav-link:hover{
+  background:#edf1f9;
+  border-color:rgba(148,163,184,.5);
+  color:#111827;
+}
+
+/* =========================
+   HERO – HOME (index.html)
+   ========================= */
+/* =========================
+   HERO – HOME (index.html)
+   ========================= */
+.hero-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: url('prt.jpg') center center/cover no-repeat;
+}
+
+.sitename-home { 
+  font-size: 14vw; 
+  color: white; 
+  mix-blend-mode: difference; 
+  margin: 0; 
+  text-transform: uppercase; 
+}
+
+/* =========================
+   HERO – PRT PAGE (prt.html)
+   ========================= */
+.hero-prt{
+  margin-top:80px;
+  min-height:85vh;
+  width:100%;
+  padding:40px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+  background:url("whatispain.jpg") center center / cover no-repeat;
+  position:relative;
+}
+
+.hero-prt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right, rgba(255,255,255,.9) 45%, rgba(255,255,255,.4));
+}
+
+.hero-content{
+  max-width:900px;
+  z-index:2;
+  position:relative;
+}
+
+.hero-prt .sitename{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  background:#E9F6FF;
+  color:var(--primary);
+  font-weight:800;
+  font-size:15px;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+.hero-prt h1{
+  font-size:40px;
+  color:var(--text);
+  margin-bottom:14px;
+}
+
+.hero-sub{
+  color:var(--soft);
+  max-width:700px;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.cta{
+  margin-top:20px;
+  padding:12px 22px;
+  border-radius:999px;
+  background:linear-gradient(135deg, var(--primary), var(--secondary));
+  color:white;
+  font-weight:700;
+  border:none;
+  font-size:15px;
+  box-shadow:0 10px 25px rgba(27,116,187,.25);
+}
+.cta:hover{
+  opacity:.95;
+}
+
+
+/* =========================
+   HERO – PRT PAGE (prt.html)
+   ========================= */
+.hero-prt{
+  margin-top:80px;
+  min-height:85vh;
+  width:100%;
+  padding:40px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+  background:url("whatispain.jpg") center center / cover no-repeat;
+  position:relative;
+}
+
+.hero-prt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right, rgba(255,255,255,.9) 45%, rgba(255,255,255,.4));
+}
+
+.hero-content{
+  max-width:900px;
+  z-index:2;
+  position:relative;
+}
+
+.hero-prt .sitename{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:999px;
+  background:#E9F6FF;
+  color:var(--primary);
+  font-weight:800;
+  font-size:15px;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+.hero-prt h1{
+  font-size:40px;
+  color:var(--text);
+  margin-bottom:14px;
+}
+
+.hero-sub{
+  color:var(--soft);
+  max-width:700px;
+  font-size:18px;
+  line-height:1.6;
+}
+
+.hero-prt .cta{
+  margin-top:22px;
+  padding:14px 26px;
+  border-radius:999px;
+  background:#111827;              /* πιο σκούρο, clean */
+  color:#fff;
+  font-weight:700;
+  border:1px solid rgba(15,23,42,.85);
+  font-size:15px;
+  letter-spacing:.02em;
+  box-shadow:0 12px 30px rgba(15,23,42,.35);
+  cursor:pointer;
+  transition:
+    background .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+.hero-prt .cta:hover{
+  background:#020617;
+  box-shadow:0 16px 40px rgba(15,23,42,.45);
+  transform:translateY(-1px);
+}
+
+/* Mobile PRT hero */
+@media(max-width:768px){
+  .hero-prt{
+    align-items:center;
+    text-align:center;
+  }
+  .hero-prt::before{
+    background:rgba(255,255,255,.95);
+  }
+  .hero-prt h1{
+    font-size:28px;
+  }
+}
+
+/* =========================
+   HERO – SERVICES PAGE (services.html)
+   ========================= */
+.hero-services{
+  margin-top:80px;
+  min-height:65vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 24px;
+  background:linear-gradient(135deg,#E9F6FF,#F4FFFD);
+}
+
+.hero-inner{
+  max-width:900px;
+  text-align:center;
+}
+
+.hero-services h1{
+  font-size:36px;
+  color:var(--text);
+}
+
+.hero-services p{
+  color:var(--soft);
+  font-size:18px;
+  margin-top:10px;
+}
+
+.big-cta{
+  margin-top:22px;
+  padding:13px 26px;
+  border-radius:999px;
+  background:#111827;
+  color:#fff;
+  font-weight:800;
+  border:1px solid #020617;
+  font-size:15px;
+  letter-spacing:.02em;
+  box-shadow:0 14px 30px rgba(15,23,42,.45);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:
+    background .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease,
+    opacity .15s ease;
+}
+
+.big-cta::after{
+  content:"→";
+  font-size:14px;
+}
+
+.big-cta:hover{
+  background:#020617;
+  transform:translateY(-1px);
+  box-shadow:0 18px 40px rgba(15,23,42,.6);
+}
+
+/* small hero responsive */
+@media(max-width:768px){
+  .hero-services h1{font-size:28px}
+}
+
+/* =========================
+   Οριζόντιο scroll section (home)
+   ========================= */
+.horizontal-container {
+  width: 100%;
+  height: 300vh;
+  position: relative; 
+  overflow: hidden;
+}
+
+.horizontal-wrapper {
+  width: 100%;
+  height: calc(100vh + 320vw);
+  position: relative;
+}
+
+.horizontal-scroller {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  align-items: center;
+  gap: 5px;
+  row-gap: clamp(24px, 5vw, 64px);
+  column-gap: clamp(20px, 3vw, 40px);
+  width: 100%;
+  height: 100vh;
+  padding: 0 5vw;
+  box-sizing: border-box;
+  min-width: 200vw; 
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.row{
+  display:flex;
+  gap:clamp(24px, 4vw, 56px);
+  perspective:1000px;
+}
+
+/* Μεταγενέστερο setup για full-width horizontal */
+.horizontal-container{ 
+  height: 100vh; 
+}
+.horizontal-scroller{ 
+  display:flex; 
+  height:100vh; 
+  width:max-content; 
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.horizontal-section{ 
+  flex: 0 0 100vw;
+  width: 100vw;
+  height:100vh; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+}
+
+/* =========================
+   Slider (home)
+   ========================= */
+.container h1 {
+  font-weight: 800; 
+  color: white; 
+  line-height: 1.2; 
+  margin: 0; 
+  text-align: center; 
+  padding: 1em;
+  background: rgba(0,0,0,.6); 
+  backdrop-filter: blur(6px); 
+  border-radius: 12px; 
+  user-select: none;
+  min-height: 10vh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,.3); 
+  transition: color 0.3s; 
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; 
+  margin-bottom: 2em; 
+  font-size: clamp(24px, 6vw, 48px);
+  max-width: 600px;
+  margin-left: auto; 
+  margin-right: auto; 
+  margin-top: 0;
+}
+
+.container h1 .highlight { 
+  color: #e50914;
+  border-bottom: 4px solid #e50914;
+  padding-bottom: 0.1em;
+  margin-bottom: 0.1em;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* βασικός slider */
+.slider{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  transition: all .3s;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  min-height: 70vh;
+  height: 70vh;
+}
+
+.slider .previous, .slider .next{
+  font-family: "FontAwesome";
+  font-size: 50px;
+  position: absolute;
+  top: 50%;
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+  left: -100px;
+  margin-top: -34px;
+  transition: all .3s;
+  opacity: 0;
+  z-index: 10000;
+}
+.slider .next{
+  right: -100px;
+  content: "\f054";
+  left: auto;
+}
+.slider:hover .previous, .slider:hover .next{
+  opacity: 1;
+}
+.slider:hover .previous{
+  left: 0;
+}
+.slider:hover .next{
+  right: 0;
+}
+.slider .slides{
+  height: 100%;
+}
+.slide{
+  padding: 10%;
+  width: 100vw;
+  text-align: center;
+  position: absolute;
+  transform: scale(0.5,0.5);
+  opacity: 0;
+  transition: all .3s;
+  padding-left: 6vw;
+  padding-right: 10%;
+}
+
+.slide p{
+  font-size: 2vw;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  right: 7%;
+  top: 15%;
+}
+
+.slide h2{
+  position: relative;
+  right: 7%;
+  top: 15%;
+  margin-top: 0;
+  font-size: 4vw;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.slide.blue{
+  background: #ccc;
+  color: #444444;
+}
+.slide.white{
+  background: #ccc;
+  color: #444444;
+}
+.slide.red{
+  background: #ccc;
+  color: #444444;
+}
+.slide.active{
+  z-index: 10;
+  left: 0;
+  opacity: 1;
+  transform: scale(1,1);
+}
+.slide.inactiveLeft{
+  left: -100vw;
+  z-index: 11;
+}
+.slide.inactiveRight{
+  left: 100vw;
+  z-index: 11;
+}
+
+.slider .bullets{
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+.slider .bullets .bullet{
+  position: relative;
+  display: inline-block;
+  background: rgba(255,255,255,.8);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  z-index: 14;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all .3s;
+}
+.slider .bullets .bullet.active{
+  background: rgba(255,255,255,.4);
+}
+.slider .bullets .bullet:hover{
+  border: 2px solid rgba(255,255,255,.8);
+  background: transparent;
+}
+
+/* Slider full μέσα στο horizontal section */
+.horizontal-section .slider{
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.horizontal-section .slider .slides{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Κάθε slide να καλύπτει όλο το section */
+.horizontal-section .slider .slide{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(.98);
+  transition: all .35s ease;
+}
+
+/* Active slide visible */
+.horizontal-section .slider .slide.active{
+  opacity: 1;
+  transform: scale(1);
+  z-index: 10;
+}
+
+/* Reset offsets */
+.horizontal-section .slider .slide h2,
+.horizontal-section .slider .slide p{
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  margin: 0;
+  text-align: center;
+  max-width: 70ch;
+}
+
+.horizontal-section .slider .slide h2{
+  font-size: clamp(32px, 4vw, 64px);
+  margin-bottom: 12px;
+}
+.horizontal-section .slider .slide p{
+  font-size: clamp(18px, 2vw, 28px);
+  opacity: .9;
+}
+
+/* =========================
+   PRT Box (δεύτερο slide στο horizontal)
+   ========================= */
+.prt-box{
+  max-width: 640px;
+  padding: 36px 40px;
+  background: linear-gradient(180deg, rgba(20,20,20,0.85), rgba(0,0,0,0.85));
+  color: #fff;
+  border-radius: 22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+.prt-box h2{
+  margin: 0;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+#prtTyping{
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.75;
+  color: rgba(255,255,255,.9);
+  max-width: 52ch;
+  white-space: pre-wrap;
+}
+
+#prtTyping::after{
+  content: "▍";
+  margin-left: 4px;
+  animation: blink 1s steps(2,end) infinite;
+}
+@keyframes blink{ 50%{opacity:0;} }
+
+.prt-box a{
+  margin-top: 8px;
+  align-self: flex-start;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 2px solid rgba(255,255,255,.3);
+  padding-bottom: 4px;
+  transition: all .25s ease;
+}
+
+.prt-box a:hover{
+  border-bottom-color: #fff;
+  transform: translateX(4px);
+}
+
+.prt-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* responsive */
+@media (max-width: 768px){
+  .prt-box{
+    padding: 24px 20px;
+  }
+}
+
+/* =========================
+   Cards / Images (home)
+   ========================= */
+.cards-container { width: 100%; margin-top: 5em; }
+.cards { display: flex; justify-content: space-between; width: 100%; height: 300vh; }
+.cards-text-container { width: 50%; }
+.cards-text {
+  height: 100vh;
+  background-color: #f9fafb;               /* απαλό γκρι/μπλε, όχι μαύρο */
+  color: var(--text);
+  font-weight: 500;
+  box-sizing: border-box;
+  font-size: clamp(16px, 1.4vw, 22px);
+  padding: 3em 2.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(15,23,42,.06);  /* πολύ διακριτική σκιά */
+}
+
+/* για να μην είναι ΤΕΡΑΣΤΙΟ το h2 */
+.cards-text > h2{
+  font-size: clamp(22px, 2.2vw, 32px);
+  margin: 0;
+}
+
+.cards-text > p { font-size: 2vw; line-height: 1.6; }
+.cards-image-container { width: 50%; position: relative; }
+.cards-image { height: 100vh; display: flex; align-items: center; justify-content: center; opacity: 0; }
+.cards-image img { width: 100%; height: 100%; object-fit: cover; }
+.fixed { position: fixed; top: 0; right: 0; width: 50%; opacity: 1; }
+.cards-cta { padding: 1em; background: #e1e1e1; text-align: center; font-size: 2vw; opacity: 0; }
+
+/* =========================
+   Zoom section (home)
+   ========================= */
+.zoom { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+.zoom-circle { height: 30vw; width: 30vw; border-radius: 100vw; background-color: white; mix-blend-mode: difference; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.zoom-content { color: white; font-size: 5vw; mix-blend-mode: difference; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* =========================
+   Big video block (αν χρησιμοποιείται)
+   ========================= */
+.big-text{ width: 100%; height: 100vh; margin: 0; padding: 0; }
+.big-text .elementor-video{ width: 100%; height: 100%; object-fit: cover; border-radius: 0; box-shadow: none; display: block; }
+
+/* =========================
+   Γενικές section κ.λπ. (για PRT + Services)
+   ========================= */
+.section{
+  max-width:950px;
+  margin:60px auto;
+  padding:0 24px;
+}
+
+.section p{
+  font-size:18px;
+  line-height:1.7;
+  color:#24303f;
+}
+
+.section img{
+  width:100%;
+  border-radius:14px;
+  margin:28px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+/* PRT info box */
+.info-box{
+  background:#F8FBFF;
+  border:1px solid rgba(0,0,0,.06);
+  padding:20px;
+  border-radius:12px;
+  margin-top:25px;
+}
+
+/* DISCLAIMER */
+.disclaimercard{
+  max-width:900px;
+  margin:40px auto 80px;
+  padding:20px 24px;
+  background:#FFF5F5;
+  border-radius:10px;
+  border:1px solid rgba(220,0,0,.3);
+}
+
+.disclaimer{
+  color:#7b0c0c;
+  font-size:17px;
+  line-height:1.5;
+  font-weight:700;
+}
+
+/* reviews scroller helpers */
+[data-track]::-webkit-scrollbar {
+  display: none;
+}
+[data-review] {
+  transition: transform .5s ease-in-out;
+}
+[data-review].active {
+  transform: translateY(-.5rem) scale(1.1);
+  transition: transform .5s ease-in-out;
+}
+
+/* =========================
+   SERVICES: Κάρτες, πακέτα κ.λπ.
+   ========================= */
+.subtitle{
+  color:var(--soft);
+  margin-bottom:18px;
+}
+
+.service{
+  background:#F8FBFF;
+  border:1px solid rgba(0,0,0,.08);
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:28px;
+}
+
+.service-title{
+  font-size:20px;
+  font-weight:800;
+  color:var(--text);
+}
+
+.service ul{
+  margin-top:10px;
+  padding-left:20px;
+}
+
+.action-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:999px;
+  background:#E9F6FF;
+  color:var(--primary);
+  font-weight:800;
+  text-decoration:none;
+}
+.action-btn:hover{
+  background:#D7EEFF;
+}
+
+/* FINAL CTA BLOCK */
+.final-cta{
+  max-width:950px;
+  margin:80px auto;
+  padding:26px 24px;
+  background:linear-gradient(135deg,#E9F6FF,#F4FFFD);
+  border-radius:16px;
+  text-align:center;
+}
+
+.final-cta h3{
+  font-size:24px;
+  color:var(--text);
+}
+
+.final-cta p{
+  color:var(--soft);
+  margin:10px 0;
+}
+
+.final-cta-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:14px 26px;
+  border-radius:999px;
+  color:white;
+  background: #0f0f0fe0;
+  font-weight:900;
+  text-decoration:none;
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+}
+.final-cta-btn:hover{
+  opacity:.9;
+  background: #6b6b6b;
+}
+
+/* =========================
+   FAQ (Services)
+   ========================= */
+.faq-section {
+  padding: 60px 16px 80px;
+}
+
+.faq-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-main);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.faq-item.is-open {
+  border-color: var(--border-color);
+}
+
+.faq-header {
+  width: 100%;
+  padding: var(--padding);
+  border: none;
+  outline: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.faq-header:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.faq-question {
+  flex: 1;
+}
+
+.faq-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 999px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.faq-icon::before {
+  transform: translate(-50%, -50%);
+}
+
+.faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item.is-open .faq-icon::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.faq-item.is-open .faq-icon::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.faq-body {
+  padding: 0 var(--padding);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition), padding-bottom var(--transition),
+    padding-top var(--transition);
+  will-change: max-height;
+  color: var(--text-main);
+}
+
+.faq-item.is-open .faq-body {
+  padding-top: 0;
+  padding-bottom: var(--padding);
+}
+
+.faq-body p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-main);
+  max-width: 720px;
+}
+
+/* FAQ responsive */
+@media (max-width: 640px) {
+  .faq-section {
+    padding: 40px 12px 56px;
+  }
+  .faq-header {
+    padding: 20px;
+    font-size: 15px;
+  }
+  .faq-body {
+    padding: 0 20px;
+  }
+  .faq-item.is-open .faq-body {
+    padding-bottom: 20px;
+  }
+}
+
+/* =========================
+   CTA / Contact (home)
+   ========================= */
+.cta{
+  padding: 72px 24px 80px;
+  background: #f9fafb;           /* απαλό, “ιατρικό” background */
+}
+
+.cta-box{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;       /* ΚΑΜΙΑ κάψουλα / κουτί */
+  border: none;
+  box-shadow: none;
+  color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cta-box h2{
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+.cta-box p{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4b5563;
+  max-width: 520px;
+}
+
+.cta-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* κύριο κουμπί – ίδιο στιλ με τα άλλα primary */
+.cta-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 12px 30px rgba(27,116,187,.35);
+  transition:
+    background .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease,
+    opacity .15s ease;
+}
+
+.cta-btn:hover{
+  opacity: .97;
+  background: #155a90;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(27,116,187,.45);
+}
+
+/* δευτερεύον link */
+.cta-link{
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.cta-link:hover{
+  text-decoration: underline;
+}
+
+/* mobile */
+@media(max-width: 768px){
+  .cta{
+    padding: 52px 18px 64px;
+  }
+  .cta-box{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cta-actions{
+    margin-top: 10px;
+  }
+}
+
+
+/* =========================
+   FOOTER – κοινό για όλες
+   ========================= */
+.site-footer{
+  margin-top:60px;
+  padding:32px 24px 24px;
+  background:#f5f7fb;
+  border-top:1px solid rgba(15,23,42,.08);
+  color:#111827;
+  font-size:14px;
+}
+
+.footer-inner{
+  max-width:900px;
+  margin:0 auto 16px;
+  display:flex;
+  gap:32px;
+  flex-wrap:wrap;
+}
+
+.footer-col{
+  flex:1 1 220px;
+  min-width:200px;
+}
+
+.footer-brand{
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+  color:var(--primary);
+}
+
+.footer-col p{
+  margin:0;
+  line-height:1.6;
+  color:#4b5563;
+}
+
+.footer-col h4{
+  margin:0 0 8px;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#6b7280;
+}
+
+.footer-col ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.footer-col li{
+  margin-bottom:6px;
+  color:#374151;
+}
+
+.footer-col a{
+  text-decoration:none;
+  color:#111827;
+}
+
+.footer-col a:hover{
+  text-decoration:underline;
+}
+
+.footer-bottom{
+  max-width:900px;
+  margin:0 auto;
+  padding-top:10px;
+  border-top:1px solid rgba(15,23,42,.06);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:space-between;
+  align-items:center;
+  color:#6b7280;
+  font-size:12px;
+}
+
+.footer-note{
+  max-width:420px;
+}
+
+/* footer mobile */
+@media(max-width:768px){
+  .footer-inner{
+    flex-direction:column;
+  }
+  .footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
